@@ -9,7 +9,7 @@
 <ul>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Cat command (useful for cat lovers and people who want to see<br>
 cats)</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled=""> Reacts the any message a user sends (Filip) with the gay pride flag</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Reacts the any message a user sends (Filip) with the gay pride flag</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> My Nasa Apod test that I still don’t know if it’s going to work properly</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> No dog command because I was lazy last night and didn’t add one.</li>
 </ul>
