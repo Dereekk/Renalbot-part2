@@ -94,6 +94,7 @@ bot.on("message", async message => {
         message.channel.send(`Hi ${modified.substr(start).split('im').map(i => i.trim()).filter(i => i).join(' ')}, I'm Renal!`)
     }
 
+    let searchURL = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=';
     let query = message.content;// had to learn how other people did the regex to parse a sentence with I'm in it just so I could do the same thing for wikipedia to get the definitions. This is totally a feature that everyone wants. Just like this bot in general. 
     let modifiedquery = query.toLowerCase().replace(/what is/g, 'whats').replace(/ a /g, ' ').replace(/[^a-z\.\?\! ]/g, '').split(/\.|\?|\!/).map(i => {
         i = ' ' + i
@@ -107,7 +108,12 @@ bot.on("message", async message => {
     .join(' and ')
     let startquery
     if(modifiedquery){
-        message.channel.send(`${modifiedquery.substr(start).split('whats').map(i => i.trim()).filter(i => i).join(' ')}, what's that?`)
+        modifiedURL = searchURL + modifiedquery.substr(startquery).split('whats').map(i => i.trim()).filter(i => i).join(' ')
+        var {body} = await superagent.get(modifiedURL)
+        console.log(body[2][0])
+        message.channel.send(body[2][0])
+
+
     }
 
     let prefix = config.prefix; //gets the prefix from the config
