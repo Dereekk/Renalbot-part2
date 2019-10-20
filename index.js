@@ -17,7 +17,16 @@ function getRandomColor() {
 
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online`);
-    bot.user.setActivity("Type ^help", {type: "PLAYING"});
+    
+     let statuses = [
+         `^help`
+    ]
+
+    setInterval(function() {
+        let status = statuses[Math.floor(Math.random() * statuses.length)];
+        bot.user.setActivity(status, {type: "WATCHING"});
+
+    }, 5000)
     
     
 });
@@ -60,34 +69,36 @@ fs.readdir("./commands/", (err, files) => {
     })
 });
 
+let y = process.openStdin()
+y.addListener("data", res =>{
+    let x = res.toString().trim().split(/ +/g)
+    bot.channels.get("584026415834333203").send(x.join(" "))
+})
+
 bot.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return;
     let prefix = config.prefix;
     let messageArray = message.content.split(" ");
-    let cmd = messageArray[0];
+    let cmd = messageArray[0].toLocaleLowerCase();
     let args = messageArray.slice(1);
 
-    if(!message.content.startsWith(prefix)){
-        console.log(message.content);
-        for (x = 0; x < googleProfanityWords.list().length; x++){
-            if(message.content.toLowerCase() == googleProfanityWords.list()[x].toLowerCase()){
-                message.reply(" Hey! That's a bad word!")
-            }
-        }
+    // if(!message.content.startsWith(prefix)){
+    //     console.log(message.content);
+    //     for (x = 0; x < googleProfanityWords.list().length; x++){
+    //         if(message.content.toLowerCase() == googleProfanityWords.list()[x].toLowerCase()){
+    //             message.reply(" Hey! That's a bad word!")
+    //         }
+    //     }
         
-    }
+    // }
     let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
     if (commandfile) commandfile.run(bot, message, args)
 
-    if(message.author.id == "359189431841980417"){
-        message.react('🏳️‍🌈');
-    }
+    //if(message.author.id == "292450109575135232"){
+    //    message.react('🏳️‍🌈').then(message.clearReactions);
+    //}
 
-    if(cmd === `${prefix}hello`){
-        return message.reply(" Hello")
-    }
-
-    if(cmd === `${prefix}help`){
+    if(cmd === `${prefix}info`){
         let sEmbed = new Discord.RichEmbed()
         .setColor(getRandomColor())
         .setTitle("You're lost")
@@ -102,25 +113,5 @@ bot.on("message", async message => {
 
         message.delete(5000);
     }
-    
-    if(cmd === `${prefix}cat`){
-        let msg = await message.channel.send("Generating...");
-
-        let {body} = await superagent
-        .get(`http://aws.random.cat/meow`)
-        //console.log(body.file)
-        if(!{body}) return message.channel.send("I broke! Try again")
-        let cEmbed = new Discord.RichEmbed()
-        .setColor(getRandomColor())
-        .setImage(body.file)
-        .setTimestamp()
-        .setThumbnail(message.guild.iconURL)
-        .setAuthor(`${message.author.username} Requested a cat`, message.author.avatarURL)
-        .setFooter(`Test | Footer`, bot.user.displayAvatarURL);
-        message.channel.send({embed: cEmbed});
-
-        msg.delete();
-    }
-
 })
 bot.login(config.token);

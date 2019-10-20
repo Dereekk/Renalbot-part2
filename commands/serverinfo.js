@@ -25,5 +25,8 @@ module.exports.run = async (bot, message, args) => {
 
 module.exports.config = {
     name: "serverinfo",
-    aliases: ["si", "Serverdesc"]
+    aliases: ["si", "Serverdesc"],
+    usage: "",
+    description: "",
+    accessableby: "Members"
 }
