@@ -4,18 +4,8 @@ const config = require("../config.json");
 const prefix = config.prefix;
 
 
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
 module.exports.run = async (bot, message, args) => {
-  if(message.author.id != "292450109575135232") return;
+  if(!message.author.id == "292450109575135232" || !message.author.id == "113865463095754758") return; //should be if it isn't either of us then do nothing
   try {
     await message.channel.send("Bye")
     process.exit()

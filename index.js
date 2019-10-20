@@ -18,7 +18,7 @@ function getRandomColor() {
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online`);
     
-     let statuses = [
+     let statuses = [//put different things in the array for it so showup at the bots presence or activity as its put here, It's going to say Watching and then what you write on the array and it'll cycle throught them all randomly.
          `^help`
     ]
 
@@ -26,13 +26,13 @@ bot.on("ready", async () => {
         let status = statuses[Math.floor(Math.random() * statuses.length)];
         bot.user.setActivity(status, {type: "WATCHING"});
 
-    }, 5000)
+    }, 60000)
     
     
 });
 
 bot.on("ready",  message => {
-    cron.schedule('0 7 * * *', async () => {
+    cron.schedule('0 7 * * *', async () => { //every morning at 7 am this sends an embed with the NASA Apod 
         var {body} = await superagent.get(`https://api.nasa.gov/planetary/apod?api_key=Ba3wAm9ImsmVvF8WxEs34fWeQkxeWAImYWFW0fWn`)
         //console.log(body)
         if(!{body}) return message.channel.send("I broke! Try again")
@@ -52,37 +52,37 @@ const fs = require("fs");
 bot.commands = new Discord.Collection();
 bot.aliases = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
+fs.readdir("./commands/", (err, files) => { //looks into the commands file
     if(err) console.log(err)
 
-    let jsfile = files.filter(f => f.split(".").pop() === "js");
+    let jsfile = files.filter(f => f.split(".").pop() === "js"); //gets the names of the files and removes the extention .js from the end
     if(jsfile.length <= 0){
-        console.log("[LOGS] Couldn't find commands");
+        console.log("[LOGS] Couldn't find commands"); // If there are no files in the command folder then it complains. 
     }
 
-    jsfile.forEach((f, i) => {
+    jsfile.forEach((f, i) => { // Each of the files gets searched for the name of the command so the bot knows when to execute it
         let pull = require(`./commands/${f}`);
         bot.commands.set(pull.config.name, pull);
         pull.config.aliases.forEach(alias => {
-            bot.aliases.set(alias, pull.config.name)
+            bot.aliases.set(alias, pull.config.name) //sets the aliases for the bot commands
         })
     })
 });
 
-let y = process.openStdin()
-y.addListener("data", res =>{
-    let x = res.toString().trim().split(/ +/g)
-    bot.channels.get("584026415834333203").send(x.join(" "))
-})
+// let y = process.openStdin()
+// y.addListener("data", res =>{
+//     let x = res.toString().trim().split(/ +/g)
+//     bot.channels.get("").send(x.join(" ")) // "Sentient mode" You can send messages through the console with this
+// })
 
 bot.on("message", async message => {
-    if(message.author.bot || message.channel.type === "dm") return;
-    let prefix = config.prefix;
-    let messageArray = message.content.split(" ");
-    let cmd = messageArray[0].toLocaleLowerCase();
-    let args = messageArray.slice(1);
+    if(message.author.bot || message.channel.type === "dm") return; // No replaying to bot messages or messages sent in dms
+    let prefix = config.prefix; //gets the prefix from the config
+    let messageArray = message.content.split(" "); //takes the message and splits it apart at each space
+    let cmd = messageArray[0].toLocaleLowerCase(); //gets the first thing in the message in this case if it were a ^help cat it would seperate ^help from cat
+    let args = messageArray.slice(1);// this would take everything after ^help and store it as args 0 1 2.. etc.
 
-    // if(!message.content.startsWith(prefix)){
+    // if(!message.content.startsWith(prefix)){ profanity message if you only send the profanity in the message
     //     console.log(message.content);
     //     for (x = 0; x < googleProfanityWords.list().length; x++){
     //         if(message.content.toLowerCase() == googleProfanityWords.list()[x].toLowerCase()){
@@ -91,14 +91,14 @@ bot.on("message", async message => {
     //     }
         
     // }
-    let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length)))
-    if (commandfile) commandfile.run(bot, message, args)
+    let commandfile = bot.commands.get(cmd.slice(prefix.length)) || bot.commands.get(bot.aliases.get(cmd.slice(prefix.length))) //actually creates the file where the commands are stored and executed from
+    if (commandfile) commandfile.run(bot, message, args) //passes these arguments to the commands
 
-    //if(message.author.id == "292450109575135232"){
+    //if(message.author.id == "292450109575135232"){ filip is gay reaction thing
     //    message.react('🏳️‍🌈').then(message.clearReactions);
     //}
 
-    if(cmd === `${prefix}info`){
+    if(cmd === `${prefix}info`){ //info embed that I wrote at 3 am one night
         let sEmbed = new Discord.RichEmbed()
         .setColor(getRandomColor())
         .setTitle("You're lost")

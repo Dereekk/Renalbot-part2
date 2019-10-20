@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
             .setColor(getRandomColor())
             .setAuthor(`${message.guild.name} Help Desk requested by ${message.guild.members.get(message.author.id).displayName}`, message.author.avatarURL)
             .setDescription(`The bot prefix is ${prefix}\n\n**Command:** ${command.config.name}\n**Description:** ${command.config.description || "No Descrtiption"}\n**Usage:** ${command.config.usage || "No Usage"}\n**Accessable by:** ${command.config.accessableby || "Members"}\n**Aliases:** ${command.config.noalias || command.config.aliases}`)
-            message.channel.send(SHenbed).catch(console.error());
+            message.channel.send(SHenbed).catch(console.error()); //sends a help embed
         }
     }
 

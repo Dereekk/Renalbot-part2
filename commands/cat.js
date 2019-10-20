@@ -25,7 +25,7 @@ module.exports.run = async (bot, message, args) => {
         .setThumbnail(message.guild.iconURL)
         .setAuthor(`${message.author.username} Requested a cat`, message.author.avatarURL)
         .setFooter(`Test | Footer`, bot.user.displayAvatarURL);
-        message.channel.send({embed: cEmbed});
+        message.channel.send({embed: cEmbed});//the cat embed
 
         msg.delete();
 }

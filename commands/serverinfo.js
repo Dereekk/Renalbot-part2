@@ -20,7 +20,7 @@ module.exports.run = async (bot, message, args) => {
         .addField("**Member Count**", `${message.guild.memberCount}`, true)
         .addField("**Role Count**", `${message.guild.roles.size}`, true)
         .setFooter(`Test | Footer`, bot.user.displayAvatarURL);
-        message.channel.send({embed: sEmbed});
+        message.channel.send({embed: sEmbed});//The server info embed
 }
 
 module.exports.config = {

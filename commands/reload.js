@@ -1,18 +1,6 @@
 const Discord = require("discord.js");
 const superagent = require("superagent");
 const config = require("../config.json");
-const prefix = config.prefix;
-
-
-
-function getRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
 
   module.exports.run = async (bot, message, args) => {
 
@@ -23,7 +11,7 @@ function getRandomColor() {
     let commandName = args[0].toLowerCase()
 
     try {
-        delete require.cache[require.resolve(`./${commandName}.js`)]
+        delete require.cache[require.resolve(`./${commandName}.js`)] //hot reloads a command that's not in the index file
         bot.commands.delete(commandName)
         const pull = require(`./${commandName}.js`)
         bot.commands.set(commandName, pull)
