@@ -77,6 +77,39 @@ fs.readdir("./commands/", (err, files) => { //looks into the commands file
 
 bot.on("message", async message => {
     if(message.author.bot || message.channel.type === "dm") return; // No replaying to bot messages or messages sent in dms
+    //I need to do the I'm stuff before I the other stuff because I need to parse the entire string as words instead of turning the string into an array
+    let str = message.content;
+    let modified = str.toLowerCase().replace(/i am/g, 'im').replace(/[^a-z\.\?\! ]/g, '').split(/\.|\?|\!/).map(i => {
+        i = ' ' + i
+        let start = i.indexOf(' im ')
+        if (start === -1) {
+            return
+        }
+        return i.substr(start)
+    })
+    .filter(i => i)
+    .join(' and ')
+    let start
+    if(modified){
+        message.channel.send(`Hi ${modified.substr(start).split('im').map(i => i.trim()).filter(i => i).join(' ')}, I'm Renal!`)
+    }
+
+    let query = message.content;// had to learn how other people did the regex to parse a sentence with I'm in it just so I could do the same thing for wikipedia to get the definitions. This is totally a feature that everyone wants. Just like this bot in general. 
+    let modifiedquery = query.toLowerCase().replace(/what is/g, 'whats').replace(/ a /g, ' ').replace(/[^a-z\.\?\! ]/g, '').split(/\.|\?|\!/).map(i => {
+        i = ' ' + i
+        let startquery = i.indexOf(' whats ')
+        if (startquery === -1) {
+            return
+        }
+        return i.substr(startquery)
+    })
+    .filter(i => i)
+    .join(' and ')
+    let startquery
+    if(modifiedquery){
+        message.channel.send(`${modifiedquery.substr(start).split('whats').map(i => i.trim()).filter(i => i).join(' ')}, what's that?`)
+    }
+
     let prefix = config.prefix; //gets the prefix from the config
     let messageArray = message.content.split(" "); //takes the message and splits it apart at each space
     let cmd = messageArray[0].toLocaleLowerCase(); //gets the first thing in the message in this case if it were a ^help cat it would seperate ^help from cat
