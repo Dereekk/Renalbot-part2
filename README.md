@@ -23,7 +23,7 @@ Takes the message and turns it into a query that can be searched on Wikipedia. R
 <h1 id="todo">TODO</h1>
 <ul>
 <li>
-<p>Add Server Creation date as a command</p>
+<p><s>Add Server Creation date as a command</s></p>
 <ul>
 <li>Probably add other commands that could also be useful for interesting things about the server and the people on it. Such as:
 <ul>
