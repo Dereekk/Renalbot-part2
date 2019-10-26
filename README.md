@@ -12,17 +12,16 @@ cats)</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Reacts the any message a user sends (Filip) with the gay pride flag</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> My Nasa Apod test that I still don’t know if it’s going to work properly</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> No dog command because I was lazy last night and didn’t add one.</li>
-</ul>
-<h1 id="todo">TODO</h1>
-<ul>
-<li>
-<p>Respond of to messages with text from Wikipedia</p>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" checked="true" disabled=""> Respond of to messages with text from Wikipedia
 <ul>
 <li>Ex. What is <strong>a bird</strong><br>
 <img src="https://github.com/Dereekk/okay/blob/master/Annotation%202019-10-18%20223408.jpg?raw=true%22" alt="Build Failing" width="450"><br>
 Takes the message and turns it into a query that can be searched on Wikipedia. Returning the first however much amount of text that we want to send to the user. <em>Might want to find a way to insure that the information provided is always relevant</em></li>
 </ul>
 </li>
+</ul>
+<h1 id="todo">TODO</h1>
+<ul>
 <li>
 <p>Add Server Creation date as a command</p>
 <ul>
