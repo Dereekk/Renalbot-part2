@@ -15,6 +15,7 @@ function getRandomColor() {
     return color;
   }
 
+
 bot.on("ready", async () => {
     console.log(`${bot.user.username} is online`);
     
@@ -28,6 +29,7 @@ bot.on("ready", async () => {
 
     }, 60000)
     
+
     
 });
 
